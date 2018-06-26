@@ -1,0 +1,63 @@
+body {
+    background: #2193b0;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+
+h1 {
+ font-family: 'Allan', Helvetica, Arial, sans-serif;
+ font-size: 70px;
+ line-height: 75px;
+ color: white;
+ display: inline-block;
+}
+
+h2 {
+ font-family: 'Allan', Helvetica, Arial, sans-serif;
+ font-size: 30px;
+ line-height: 75px;
+ color: white;
+ display: inline-block;
+ float: right
+}
+
+p {
+ font-family: 'Cardo', Georgia, Times, serif;
+ font-size: 18px;
+ line-height: 25px;
+ color: white
+}
+
+.input-group, button {
+    margin-top: 15px;
+}
+
+form {
+    margin-top: 7%;
+}
+
+
+a, a:hover {
+    text-decoration: none !important;
+    color: inherit
+}
+
+.logout {
+     font-family: 'Allan', Helvetica, Arial, sans-serif;
+     font-size: 20px;
+     line-height: 75px;
+     color: white;
+     display: inline-block;
+     float: right;
+     cursor: pointer
+}
+
+.dashboard {
+    margin-top: 10%
+}
+
+.btn-warning {
+    color: white;
+}

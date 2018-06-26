@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form method="POST" action="/login/">
+  {% if error %}
+<div class="alert alert-danger col-md-4">
+  <strong><i class="fa fa-exclamation-triangle"></i>  {{error}}</strong>
+</div>
+{% endif %}
+  {% csrf_token %}
+  <div class="input-group input-group-lg col-md-4">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></span>
+    </div>
+    <input name="username" type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="Username">
+  </div>
+
+  <div class="input-group input-group-lg col-md-4">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i></span>
+    </div>
+    <input name="password" type="password" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="Password">
+  </div>
+
+  <button type="submit" class="btn btn-light btn-lg">Login</button>
+
+</form>
+
+{% endblock %}

@@ -15,7 +15,17 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from core.views import *
+from django.conf import settings
+
+from django.conf.urls.static import static
 
 urlpatterns = [
+    url(r'^$', index_view),
+    url(r'^login/', login_view),
+    url(r'^logout/', logout_view),
+    url(r'^new-case/', new_case_view),
+    url(r'^visualize/', visualize_view),
+    url(r'^dashboard/', dashboard_view),
     url(r'^admin/', admin.site.urls),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
