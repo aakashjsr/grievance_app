@@ -1,6 +1,125 @@
 {% extends 'base.html' %}
 {% block content %}
 
-new case
+<form action="/new-case/" method="POST">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col col-md-6">
+            <div class="form-group">
+
+                <label>Project</label>
+                <font color="red">{{form.project.errors.as_text}}</font>
+                {{ form.project }}
+            </div>
+        </div>
+        <div class="col col-md-6">
+            <div class="form-group">
+                <label>Category</label>
+                <font color="red">{{form.grievance.errors.as_text}}</font>
+                 {{ form.grievance }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-md-6">
+            <div class="form-group">
+                <label>Responsible Entity <a href="/responsible-person/"><i class="fa fa-plus-circle"></i></a></label>
+                <font color="red">{{form.responsible_entity.errors.as_text}}</font>
+                 {{ form.responsible_entity }}
+            </div>
+        </div>
+        <div class="col col-md-6">
+            <div class="form-group">
+                <label>Complainant Name</label>
+                <font color="red">{{form.complainant_name.errors.as_text}}</font>
+                {{ form.complainant_name }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-md-6">
+            <div class="form-group">
+                <label>Incident Location Type</label>
+                <font color="red">{{form.incident_location_type.errors.as_text}}</font>
+                {{ form.incident_location_type }}
+            </div>
+        </div>
+        <div class="col col-md-6">
+            <div class="form-group">
+                <label>Complainant Telephone</label>
+                <font color="red">{{form.complainant_telephone.errors.as_text}}</font>
+                {{ form.complainant_telephone }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-md-6">
+            <div class="form-group">
+                <label>Incident City</label>
+                <font color="red">{{form.incident_location_city.errors.as_text}}</font>
+                {{ form.incident_location_city }}
+            </div>
+        </div>
+        <div class="col col-md-6">
+            <div class="form-group">
+                <label>Incident Date</label>
+                <font color="red">{{form.incident_date.errors.as_text}}</font>
+                {{ form.incident_date }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-md-6">
+            <div class="form-group">
+                <label>Accused Party</label>
+                <font color="red">{{form.accused_party.errors.as_text}}</font>
+                {{ form.accused_party }}
+            </div>
+        </div>
+        <div class="col col-md-6">
+            <div class="form-group">
+                <label>Accused Name</label>
+                <font color="red">{{form.accused_name.errors.as_text}}</font>
+                {{ form.accused_name }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-md-6">
+            <div class="form-group">
+                <label>Complainant Address</label>
+                <font color="red">{{form.complainant_address.errors.as_text}}</font>
+                {{ form.complainant_address }}
+            </div>
+        </div>
+        <div class="col col-md-6">
+            <div class="form-group">
+                <label>Incident Details</label>
+                <font color="red">{{form.incident_details.errors.as_text}}</font>
+                {{ form.incident_details }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-md-6" align="right">
+            <button type="submit" class="btn-lg btn-dark" type="submit">
+                <i class="fa fa-file"></i> Create Case
+            </button>
+        </div>
+        <div class="col col-md-6" align="left">
+            <button class="btn-lg btn-dark" type="reset">
+                 <i class="fa fa-trash"></i> Clear
+            </button>
+        </div>
+    </div>
+</form>
+<br><br>
+
 
 {% endblock %}

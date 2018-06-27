@@ -23,6 +23,13 @@ h2 {
  float: right
 }
 
+h3 {
+ font-family: 'Allan', Helvetica, Arial, sans-serif;
+ font-size: 30px;
+ line-height: 75px;
+ color: white;
+}
+
 p {
  font-family: 'Cardo', Georgia, Times, serif;
  font-size: 18px;
@@ -34,7 +41,7 @@ p {
     margin-top: 15px;
 }
 
-form {
+.login-form {
     margin-top: 7%;
 }
 
@@ -60,4 +67,19 @@ a, a:hover {
 
 .btn-warning {
     color: white;
+}
+
+label {
+    color: white;
+    font-family: 'Cardo', Georgia, Times, serif;
+    display: block
+}
+
+td {
+margin: 20px
+}
+
+.custom-date {
+    width: 32%;
+    display: inline-block
 }

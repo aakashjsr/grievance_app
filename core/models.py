@@ -32,7 +32,7 @@ class ResponsibleEntity(models.Model):
     added_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "{}-{}-{}".format(self.person, self.position, self.organisation)
+        return "{},{},{},{}".format(self.person, self.position, self.organisation, self.site)
 
 
 class Grievance(models.Model):
@@ -60,10 +60,10 @@ class Case(models.Model):
     incident_location_city = models.CharField(max_length=50, null=True, blank=True)
     incident_date = models.DateField()
     incident_location_type = models.CharField(max_length=50, choices=[
-        ("Home", "home"),
-        ("Public Space", "public_space"),
-        ("Work Site", "work_site"),
-        ("Government office", "government_office")
+        ("home", "Home"),
+        ("public_space", "Public Space"),
+        ("work_site", "Work Site"),
+        ("government_office", "Government office")
     ])
     incident_details = models.TextField(max_length=1024)
     accused_party = models.CharField(max_length=50)

@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^logout/', logout_view),
     url(r'^new-case/', new_case_view),
     url(r'^visualize/', visualize_view),
+    url(r'^responsible-person/', responsible_person_view),
     url(r'^dashboard/', dashboard_view),
     url(r'^admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
