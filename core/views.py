@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-from core.forms import CaseForm
+from core.forms import CaseForm, ResponsibilityForm
 
 
 def index_view(request, *args, **kwargs):
@@ -46,11 +46,16 @@ def visualize_view(request, *args, **kwargs):
 @login_required(login_url='/')
 def responsible_person_view(request, *args, **kwargs):
     if request.method == "GET":
-        return render(request, "responsible.html")
+        return render(request, "responsible.html", {"form": ResponsibilityForm()})
 
     if request.method == "POST":
-        print(request.POST)
-        return render(request, "responsible.html")
+        post_data = request.POST.copy()
+        post_data["added_by"] = request.user.id
+        form_data = ResponsibilityForm(post_data)
+        if form_data.is_valid():
+            form_data.save()
+            return HttpResponseRedirect("/dashboard/")
+        return render(request, "responsible.html", {"form": form_data})
 
 
 @login_required(login_url='/')

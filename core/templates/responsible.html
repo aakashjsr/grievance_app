@@ -1,6 +1,58 @@
 {% extends 'base.html' %}
 {% block content %}
 
-responsible
+<form action="/responsible-person/" method="POST">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col col-md-6">
+            <div class="form-group">
+
+                <label>Person's Name</label>
+                <font color="red">{{form.person.errors.as_text}}</font>
+                {{ form.person }}
+            </div>
+        </div>
+        <div class="col col-md-6">
+            <div class="form-group">
+                <label>Position</label>
+                <font color="red">{{form.position.errors.as_text}}</font>
+                 {{ form.position }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-md-6">
+            <div class="form-group">
+                <label>Organisation</label>
+                <font color="red">{{form.organisation.errors.as_text}}</font>
+                 {{ form.organisation }}
+            </div>
+        </div>
+        <div class="col col-md-6">
+            <div class="form-group">
+                <label>Site</label>
+                <font color="red">{{form.site.errors.as_text}}</font>
+                {{ form.site }}
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col col-md-6" align="right">
+            <button type="submit" class="btn-lg btn-dark" type="submit">
+                <i class="fa fa-file"></i> Create
+            </button>
+        </div>
+        <div class="col col-md-6" align="left">
+            <button class="btn-lg btn-dark" type="reset">
+                 <i class="fa fa-trash"></i> Clear
+            </button>
+        </div>
+    </div>
+</form>
+<br><br>
+
 
 {% endblock %}
