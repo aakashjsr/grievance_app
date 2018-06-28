@@ -4,168 +4,171 @@
     <div class="row">
         <div class="col col-md-12" align="center">
             <div class="card" style="width: 80%">
-              <div class="card-body">
-                <h5 class="card-title"> New Case </h5>
+                <div class="card-body">
+                    <h5 class="card-title"> New Case </h5>
 
 
-                  <form action="/new-case/" method="POST">
-                      {% csrf_token %}
-                      <input type="hidden" name="project" value="{{project.id}}">
-                      <div class="row" align="left">
-                          <div class="col col-md-6">
-                              <div class="form-group">
-                                  <label>Project: {{project.name}}</label>
-                              </div>
-                          </div>
-                          <div class="col col-md-6">
-                              <div class="form-group">
-                                  <label>Case Number: {{case_id}}</label>
-                              </div>
-                          </div>
-                      </div>
+                    <form action="/new-case/" method="POST" id="caseForm">
+                        {% csrf_token %}
+                        <input type="hidden" name="project" value="{{project.id}}">
+                        <div class="row" align="left">
+                            <div class="col col-md-6">
+                                <div class="form-group">
+                                    <label>Project: {{project.name}}</label>
+                                </div>
+                            </div>
+                            <div class="col col-md-6">
+                                <div class="form-group">
+                                    <label>Case Number: {{case_id}}</label>
+                                </div>
+                            </div>
+                        </div>
 
-                      <div class="row" align="left">
-                          <div class="col col-md-6">
-                              <div class="form-group">
-                                  <label>Incident Phase: 1</label>
-                              </div>
-                          </div>
-                          <div class="col col-md-6">
-                              <div class="form-group">
-                                  <label> Responsible Person's Organization: <span id="organization">-</span></label>
-                              </div>
-                          </div>
-                      </div>
+                        <div class="row" align="left">
+                            <div class="col col-md-6">
+                                <div class="form-group">
+                                    <label>Incident Phase: 1</label>
+                                </div>
+                            </div>
+                            <div class="col col-md-6">
+                                <div class="form-group">
+                                    <label> Responsible Person's Organization: <span id="organization">-</span></label>
+                                </div>
+                            </div>
+                        </div>
 
-                      <div class="row" align="left">
-                          <div class="col col-md-6">
-                              <div class="form-group">
-                                  <label> Responsible Person's Position: <span id="position">-</span></label>
-                              </div>
-                          </div>
-                          <div class="col col-md-6">
-                              <div class="form-group">
-                                  <label> Responsible Person's Site: <span id="site">-</span></label>
-                              </div>
-                          </div>
-                      </div>
+                        <div class="row" align="left">
+                            <div class="col col-md-6">
+                                <div class="form-group">
+                                    <label> Responsible Person's Position: <span id="position">-</span></label>
+                                </div>
+                            </div>
+                            <div class="col col-md-6">
+                                <div class="form-group">
+                                    <label> Responsible Person's Site: <span id="site">-</span></label>
+                                </div>
+                            </div>
+                        </div>
 
-                      <div class="row" align="left">
-                          <div class="col col-md-6">
-                              <div class="form-group">
-                                  <label>Responsible Entity <a href="/responsible-person/"><i class="fa fa-plus-circle"></i></a></label>
-                                  <font color="red">{{form.responsible_entity.errors.as_text}}</font>
-                                  {{ form.responsible_entity }}
-                              </div>
-                          </div>
-                          <div class="col col-md-6">
-                              <div class="form-group">
-                                  <label>Grievance Category</label>
-                                  <font color="red">{{form.grievance.errors.as_text}}</font>
-                                  {{ form.grievance }}
-                              </div>
-                          </div>
-                      </div>
+                        <div class="row" align="left">
+                            <div class="col col-md-6">
+                                <div class="form-group">
+                                    <label>
+                                        Responsible Entity
+                                        <i class="fa fa-plus-circle" data-toggle="modal" data-target="#inputModal"></i>
+                                    </label>
+                                    <font color="red">{{form.responsible_entity.errors.as_text}}</font>
+                                    {{ form.responsible_entity }}
+                                </div>
+                            </div>
+                            <div class="col col-md-6">
+                                <div class="form-group">
+                                    <label>Grievance Category</label>
+                                    <font color="red">{{form.grievance.errors.as_text}}</font>
+                                    {{ form.grievance }}
+                                </div>
+                            </div>
+                        </div>
 
-                      <div class="row" align="left">
-                          <div class="col col-md-6">
-                              <div class="form-group">
-                                  <label>Complainant Name</label>
-                                  <font color="red">{{form.complainant_name.errors.as_text}}</font>
-                                  {{ form.complainant_name }}
-                              </div>
-                          </div>
-                          <div class="col col-md-6">
-                              <div class="form-group">
-                                  <label>Anonymous</label>
-                                  <input id="anonymous" type="checkbox" class="form-control">
-                              </div>
-                          </div>
-                      </div>
+                        <div class="row" align="left">
+                            <div class="col col-md-6">
+                                <div class="form-group">
+                                    <label>Complainant Name</label>
+                                    <font color="red">{{form.complainant_name.errors.as_text}}</font>
+                                    {{ form.complainant_name }}
+                                </div>
+                            </div>
+                            <div class="col col-md-6">
+                                <div class="form-group">
+                                    <label>Anonymous</label>
+                                    <input id="anonymous" type="checkbox" class="form-control">
+                                </div>
+                            </div>
+                        </div>
 
-                      <div class="row" align="left">
-                          <div class="col col-md-6">
-                              <div class="form-group">
-                                  <label>Incident Location Type</label>
-                                  <font color="red">{{form.incident_location_type.errors.as_text}}</font>
-                                  {{ form.incident_location_type }}
-                              </div>
-                          </div>
-                          <div class="col col-md-6">
-                              <div class="form-group">
-                                  <label>Complainant Telephone</label>
-                                  <font color="red">{{form.complainant_telephone.errors.as_text}}</font>
-                                  {{ form.complainant_telephone }}
-                              </div>
-                          </div>
-                      </div>
+                        <div class="row" align="left">
+                            <div class="col col-md-6">
+                                <div class="form-group">
+                                    <label>Incident Location Type</label>
+                                    <font color="red">{{form.incident_location_type.errors.as_text}}</font>
+                                    {{ form.incident_location_type }}
+                                </div>
+                            </div>
+                            <div class="col col-md-6">
+                                <div class="form-group">
+                                    <label>Complainant Telephone</label>
+                                    <font color="red">{{form.complainant_telephone.errors.as_text}}</font>
+                                    {{ form.complainant_telephone }}
+                                </div>
+                            </div>
+                        </div>
 
-                      <div class="row" align="left">
-                          <div class="col col-md-6">
-                              <div class="form-group">
-                                  <label>Incident City</label>
-                                  <font color="red">{{form.incident_location_city.errors.as_text}}</font>
-                                  {{ form.incident_location_city }}
-                              </div>
-                          </div>
-                          <div class="col col-md-6">
-                              <div class="form-group">
-                                  <label>Incident Date</label>
-                                  <font color="red">{{form.incident_date.errors.as_text}}</font>
-                                  {{ form.incident_date }}
-                              </div>
-                          </div>
-                      </div>
+                        <div class="row" align="left">
+                            <div class="col col-md-6">
+                                <div class="form-group">
+                                    <label>Incident City</label>
+                                    <font color="red">{{form.incident_location_city.errors.as_text}}</font>
+                                    {{ form.incident_location_city }}
+                                </div>
+                            </div>
+                            <div class="col col-md-6">
+                                <div class="form-group">
+                                    <label>Incident Date</label>
+                                    <font color="red">{{form.incident_date.errors.as_text}}</font>
+                                    {{ form.incident_date }}
+                                </div>
+                            </div>
+                        </div>
 
-                      <div class="row" align="left">
-                          <div class="col col-md-6">
-                              <div class="form-group">
-                                  <label>Accused Party</label>
-                                  <font color="red">{{form.accused_party.errors.as_text}}</font>
-                                  {{ form.accused_party }}
-                              </div>
-                          </div>
-                          <div class="col col-md-6">
-                              <div class="form-group">
-                                  <label>Accused Name</label>
-                                  <font color="red">{{form.accused_name.errors.as_text}}</font>
-                                  {{ form.accused_name }}
-                              </div>
-                          </div>
-                      </div>
+                        <div class="row" align="left">
+                            <div class="col col-md-6">
+                                <div class="form-group">
+                                    <label>Accused Party</label>
+                                    <font color="red">{{form.accused_party.errors.as_text}}</font>
+                                    {{ form.accused_party }}
+                                </div>
+                            </div>
+                            <div class="col col-md-6">
+                                <div class="form-group">
+                                    <label>Accused Name</label>
+                                    <font color="red">{{form.accused_name.errors.as_text}}</font>
+                                    {{ form.accused_name }}
+                                </div>
+                            </div>
+                        </div>
 
-                      <div class="row" align="left">
-                          <div class="col col-md-6">
-                              <div class="form-group">
-                                  <label>Complainant Address</label>
-                                  <font color="red">{{form.complainant_address.errors.as_text}}</font>
-                                  {{ form.complainant_address }}
-                              </div>
-                          </div>
-                          <div class="col col-md-6">
-                              <div class="form-group">
-                                  <label>Incident Details</label>
-                                  <font color="red">{{form.incident_details.errors.as_text}}</font>
-                                  {{ form.incident_details }}
-                              </div>
-                          </div>
-                      </div>
+                        <div class="row" align="left">
+                            <div class="col col-md-6">
+                                <div class="form-group">
+                                    <label>Complainant Address</label>
+                                    <font color="red">{{form.complainant_address.errors.as_text}}</font>
+                                    {{ form.complainant_address }}
+                                </div>
+                            </div>
+                            <div class="col col-md-6">
+                                <div class="form-group">
+                                    <label>Incident Details</label>
+                                    <font color="red">{{form.incident_details.errors.as_text}}</font>
+                                    {{ form.incident_details }}
+                                </div>
+                            </div>
+                        </div>
 
-                      <div class="row">
-                          <div class="col col-md-6" align="right">
-                              <button type="submit" class="btn btn-dark" type="submit">
-                                  <i class="fa fa-file"></i> Create Case
-                              </button>
-                          </div>
-                          <div class="col col-md-6" align="left">
-                              <button class="btn btn-dark" type="reset">
-                                  <i class="fa fa-trash"></i> Clear
-                              </button>
-                          </div>
-                      </div>
-                  </form>
+                        <div class="row">
+                            <div class="col col-md-6" align="right">
+                                <button type="submit" class="btn btn-dark" type="submit">
+                                    <i class="fa fa-file"></i> Create Case
+                                </button>
+                            </div>
+                            <div class="col col-md-6" align="left">
+                                <button class="btn btn-dark" type="reset">
+                                    <i class="fa fa-trash"></i> Clear
+                                </button>
+                            </div>
+                        </div>
+                    </form>
 
-              </div>
+                </div>
             </div>
         </div>
 
@@ -198,6 +201,103 @@
         });
 
     });
+
+</script>
+
+
+<div class="modal" id="inputModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">New Responsible Person</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+
+            <div class="modal-body">
+                <form action="/responsible-person/" method="POST" id="personForm">
+                    {% csrf_token %}
+                    <input type="hidden" name="saved" id="saved" value="{}">
+                    <input type="hidden" name="project_id" value="{{project.id}}">
+                    <div class="row">
+                        <div class="col col-md-6">
+                            <div class="form-group">
+
+                                <label>Person's Full Name</label>
+                                <input type="text" name="person" required>
+                            </div>
+                        </div>
+                        <div class="col col-md-6">
+                            <div class="form-group">
+                                <label>Position</label>
+                                <input type="text" name="position" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-md-6">
+                            <div class="form-group">
+                                <label>Organisation</label>
+                                <input type="text" name="organisation" required>
+                            </div>
+                        </div>
+                        <div class="col col-md-6">
+                            <div class="form-group">
+                                <label>Site</label>
+                                <input type="text" name="site" required>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col col-md-6" align="right">
+                            <button class="btn-lg btn-dark">
+                                <i class="fa fa-file" id="inputSubmit"></i> Create
+                            </button>
+                        </div>
+                        <div class="col col-md-6" align="left">
+                            <button class="btn-lg btn-dark" type="reset">
+                                <i class="fa fa-trash"></i> Clear
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function toJSONString( form ) {
+		var obj = {};
+		var elements = form.querySelectorAll( "input, select, textarea" );
+		for( var i = 0; i < elements.length; ++i ) {
+			var element = elements[i];
+			var name = element.name;
+			var value = element.value;
+
+			if( name ) {
+				obj[ name ] = value;
+			}
+		}
+		return JSON.stringify( obj );
+	}
+
+	$("document").ready(function() {
+        $('#personForm').submit(function() {
+            var data = toJSONString(document.getElementById("caseForm"))
+            $("#saved").val(data)
+            return true;
+        });
+
+	});
+
+
 </script>
 
 

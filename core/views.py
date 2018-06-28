@@ -1,4 +1,4 @@
-import datetime
+import datetime, json
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate, logout
@@ -17,7 +17,6 @@ def login_view(request, *args, **kwargs):
     username = request.POST.get("username")
     password = request.POST.get("password")
     user = authenticate(username=username, password=password)
-    print(user)
     if user:
         login(request, user)
         return HttpResponseRedirect("/dashboard/")
@@ -52,22 +51,28 @@ def visualize_view(request, *args, **kwargs):
         return render(request, "visualize.html")
 
     if request.method == "POST":
-        print(request.POST)
         return render(request, "visualize.html")
 
 
 @login_required(login_url='/')
 def responsible_person_view(request, *args, **kwargs):
-    if request.method == "GET":
-        return render(request, "new_responsible.html", {"form": ResponsibilityForm()})
-
     if request.method == "POST":
         post_data = request.POST.copy()
+
         post_data["added_by"] = request.user.id
         form_data = ResponsibilityForm(post_data)
         if form_data.is_valid():
             form_data.save()
-            return HttpResponseRedirect("/dashboard/")
+            project = models.Project.objects.get(id=post_data.get("project_id"))
+            case_form = CaseForm(initial=json.loads(post_data.get("saved")))
+            responsible_data = {}
+            for data in models.ResponsibleEntity.objects.all():
+                responsible_data[data.id] = {"organization": data.organisation, "position": data.position,
+                                             "site": data.site}
+            return render(request, "new_case.html", {
+                "form": case_form, "project": project, "case_id": project.cases.count() + 1,
+                "responsible_data": responsible_data
+            })
         return render(request, "new_responsible.html", {"form": form_data})
 
 
@@ -85,7 +90,6 @@ def new_case_view(request, *args, **kwargs):
         })
     if request.method == "POST":
         post_data = request.POST.copy()
-        print(post_data)
         post_data["user"] = request.user.id
         post_data["timestamp"] = str(datetime.datetime.now())
         post_data["case_id"] = models.Project.objects.get(id=post_data["project"]).cases.count() + 1
@@ -93,5 +97,4 @@ def new_case_view(request, *args, **kwargs):
         if form_data.is_valid():
             form_data.save()
             return HttpResponseRedirect("/dashboard/")
-        print(form_data.errors)
         return render(request, "new_case.html", {"form": form_data})
