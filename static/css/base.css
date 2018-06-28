@@ -19,6 +19,7 @@
     color: #563d7c;
 }
 
+
 .login-icon {
     margin: 0 auto;
     font-size: 100px;
@@ -93,7 +94,3 @@ td {
 margin: 20px
 }
 
-.custom-date {
-    width: 32%;
-    display: inline-block
-}

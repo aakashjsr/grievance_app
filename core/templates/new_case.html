@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-
 <div class="dashboard">
     <div class="row">
         <div class="col col-md-12" align="center">
@@ -164,6 +163,12 @@
 
 <script>
     $("document").ready(function(){
+
+        $('.datepicker').pickadate({
+          format: 'yyyy-mm-dd',
+          formatSubmit: 'yyyy-mm-dd'
+        });
+
         $("#anonymous").on("click", function(){
             var status = $('input[name=complainant_name]').prop('disabled');
             $('input[name=complainant_name]').prop('disabled', !status);

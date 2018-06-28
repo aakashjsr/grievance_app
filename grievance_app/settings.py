@@ -123,6 +123,7 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/tmp/'
 
 AUTH_USER_MODEL = 'core.User'
 
