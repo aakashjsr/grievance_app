@@ -76,7 +76,13 @@ def new_case_view(request, *args, **kwargs):
     if request.method == "GET":
         project = models.Project.objects.get(id=request.GET.get("project_id"))
         case_form = CaseForm()
-        return render(request, "new_case.html", {"form": case_form, "project": project, "case_id": project.cases.count() + 1})
+        responsible_data = {}
+        for data in models.ResponsibleEntity.objects.all():
+            responsible_data[data.id] = {"organization": data.organisation, "position": data.position, "site": data.site}
+        return render(request, "new_case.html", {
+            "form": case_form, "project": project, "case_id": project.cases.count() + 1,
+            "responsible_data": responsible_data
+        })
     if request.method == "POST":
         post_data = request.POST.copy()
         print(post_data)

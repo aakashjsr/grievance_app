@@ -32,7 +32,20 @@
                           </div>
                           <div class="col col-md-6">
                               <div class="form-group">
-                                  <label> Requested Date: {% now "jS F Y H:i" %}</label>
+                                  <label> Responsible Person's Organization: <span id="organization">-</span></label>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="row" align="left">
+                          <div class="col col-md-6">
+                              <div class="form-group">
+                                  <label> Responsible Person's Position: <span id="position">-</span></label>
+                              </div>
+                          </div>
+                          <div class="col col-md-6">
+                              <div class="form-group">
+                                  <label> Responsible Person's Site: <span id="site">-</span></label>
                               </div>
                           </div>
                       </div>
@@ -162,6 +175,7 @@
 <br><br>
 
 <script>
+    var responsibleData = {{responsible_data | safe}}
     $("document").ready(function(){
 
         $('.datepicker').pickadate({
@@ -173,6 +187,16 @@
             var status = $('input[name=complainant_name]').prop('disabled');
             $('input[name=complainant_name]').prop('disabled', !status);
         });
+
+        $('select[name=responsible_entity]').on("change", function() {
+            var id = $('select[name=responsible_entity]').val();
+            if (responsibleData[id]) {
+                $("#site").text(responsibleData[id].site);
+                $("#organization").text(responsibleData[id].organization);
+                $("#position").text(responsibleData[id].position);
+            }
+        });
+
     });
 </script>
 

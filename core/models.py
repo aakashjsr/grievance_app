@@ -32,7 +32,7 @@ class ResponsibleEntity(models.Model):
     added_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "{},{},{},{}".format(self.person, self.position, self.organisation, self.site)
+        return self.person
 
 
 class Grievance(models.Model):
