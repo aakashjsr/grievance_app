@@ -6,8 +6,8 @@
         <div class="col col-md-12" align="center">
             <div class="card" style="width: 80%">
               <div class="card-body">
-                <h5 class="card-title"> Case # {{ case.case_id }} </h5>
-                <h6 class="card-subtitle mb-2 text-muted"> Case details </h6>
+                <h5 class="card-title"> Case # {{ case.case_id }}  </h5>
+                <h6 class="card-subtitle mb-2 text-muted"> Created by {{case.user}}</h6>
                   <br><br>
 
                 <div class="row" align="left">
@@ -24,16 +24,26 @@
                         <label>Project : {{case.project.name}}</label>
                     </div>
                     <div class="col col-md-6">
-                        <label>Created By : {{case.user}}</label>
+                        <label>Grievance : {{case.grievance}}</label>
+
                     </div>
                 </div>
 
                   <div class="row" align="left">
                     <div class="col col-md-6">
-                        <label>Grievance : {{case.grievance}}</label>
+                        <label>Responsible Person : {{case.responsible_entity.person}}</label>
                     </div>
                     <div class="col col-md-6">
-                        <label>Responsible Person : {{case.responsible_entity.person}}</label>
+                        <label>Responsible Person's Site : {{case.responsible_entity.site}}</label>
+                    </div>
+                </div>
+
+                  <div class="row" align="left">
+                    <div class="col col-md-6">
+                        <label>Responsible Person's Organisation : {{case.responsible_entity.organisation}}</label>
+                    </div>
+                    <div class="col col-md-6">
+                        <label>Responsible Person's Position : {{case.responsible_entity.position}}</label>
                     </div>
                 </div>
 
