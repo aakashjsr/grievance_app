@@ -4,10 +4,11 @@ from core.models import *
 
 
 class CustomUserAdmin(UserAdmin):
-    fieldsets = UserAdmin.fieldsets + (
-        ("GrievanceApp", {'fields': ('projects', 'organisation', 'position')}),
+    fieldsets = (
+        ('Personal Info', {'fields': ('username', 'password', 'first_name', 'last_name', 'email')}),
+        ("Important Date", {'fields': ('last_login', 'date_joined')}),
+        ("Grievance App", {'fields': ('projects', 'organisation', 'position')}),
     )
-
 
 
 admin.site.register(Project)

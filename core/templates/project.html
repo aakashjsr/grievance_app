@@ -12,7 +12,7 @@
                   <select class="form-control col-md-8" id="selectedCase">
                       <option selected disabled value="-1">Select a case</option>
                       {% for case in cases %}
-                      <option value="{{case.id}}">Case #{{case.case_id}}</option>
+                      <option value="{{case.id}}">Case_{{case.case_id}}_{{case.complainant_name}}_{{case.incident_location_city}}</option>
                       {% endfor %}
                   </select>
                   <button id="opener" class="btn btn-success"><i class="fa fa-folder-open"></i> View Case</button>
