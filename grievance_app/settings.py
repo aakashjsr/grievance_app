@@ -125,3 +125,5 @@ STATICFILES_DIRS = [
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'core.User'
+
+TIME_ZONE = "Europe/Amsterdam"

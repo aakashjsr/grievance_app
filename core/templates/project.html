@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="dashboard">
+    <div class="row">
+        <div class="col col-md-12" align="center">
+            <div class="card" style="width: 80%">
+              <div class="card-body">
+                <h5 class="card-title"> {{ project.name }} </h5>
+                <h6 class="card-subtitle mb-2 text-muted">Select / Create a case</h6>
+                  <br><br>
+                  <select class="form-control col-md-8" id="selectedCase">
+                      <option selected disabled value="-1">Select a case</option>
+                      {% for case in cases %}
+                      <option value="{{case.id}}">Case #{{case.case_id}}</option>
+                      {% endfor %}
+                  </select>
+                  <button id="opener" class="btn btn-success"><i class="fa fa-folder-open"></i> View Case</button>
+                  <a href="/new-case/?project_id={{project.id}}">
+                    <button id="creator" class="btn btn-success"><i class="fa fa-plus-square"></i> Create Case</button>
+                  </a>
+
+              </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    $("document").ready(function() {
+
+        function openCase() {
+            var val = parseInt($("#selectedCase").val());
+            if (val > 0 ) {
+                location.href = "/case/" + val;
+            }
+        }
+        $("#opener").on("click", openCase);
+    });
+</script>
+
+{% endblock %}

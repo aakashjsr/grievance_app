@@ -49,15 +49,16 @@ class Case(models.Model):
     """
     Case relation.
     """
+    case_id = models.IntegerField()
     timestamp = models.DateTimeField(auto_created=True)
     project = models.ForeignKey(Project, related_name="cases", on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name="cases", on_delete=models.CASCADE)
     grievance = models.ForeignKey(Grievance, related_name="cases", on_delete=models.CASCADE)
     responsible_entity = models.ForeignKey(ResponsibleEntity, related_name="cases", on_delete=models.CASCADE)
     complainant_name = models.CharField(max_length=50, null=True, blank=True)
-    complainant_address = models.TextField(null=True, blank=True)
-    complainant_telephone = models.CharField(max_length=50, null=True, blank=True)
-    incident_location_city = models.CharField(max_length=50, null=True, blank=True)
+    complainant_address = models.TextField()
+    complainant_telephone = models.CharField(max_length=50)
+    incident_location_city = models.CharField(max_length=50)
     incident_date = models.DateField()
     incident_location_type = models.CharField(max_length=50, choices=[
         ("home", "Home"),

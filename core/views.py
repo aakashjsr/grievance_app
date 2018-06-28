@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from core.forms import CaseForm, ResponsibilityForm
+import core.models as models
 
 
 def index_view(request, *args, **kwargs):
@@ -30,7 +31,19 @@ def logout_view(request, *args, **kwargs):
 
 @login_required(login_url='/')
 def dashboard_view(request, *args, **kwargs):
-    return render(request, "dashboard.html")
+    return render(request, "dashboard.html", {"projects": request.user.projects.all()})
+
+
+@login_required(login_url='/')
+def project_view(request, project_id, *args, **kwargs):
+    project = models.Project.objects.get(id=project_id)
+    return render(request, "project.html", {"project": project, "cases": project.cases.all()})
+
+
+@login_required(login_url='/')
+def case_view(request, case_id, *args, **kwargs):
+    case = models.Case.objects.get(id=case_id)
+    return render(request, "case.html", {"case": case})
 
 
 @login_required(login_url='/')
@@ -46,7 +59,7 @@ def visualize_view(request, *args, **kwargs):
 @login_required(login_url='/')
 def responsible_person_view(request, *args, **kwargs):
     if request.method == "GET":
-        return render(request, "responsible.html", {"form": ResponsibilityForm()})
+        return render(request, "new_responsible.html", {"form": ResponsibilityForm()})
 
     if request.method == "POST":
         post_data = request.POST.copy()
@@ -55,20 +68,24 @@ def responsible_person_view(request, *args, **kwargs):
         if form_data.is_valid():
             form_data.save()
             return HttpResponseRedirect("/dashboard/")
-        return render(request, "responsible.html", {"form": form_data})
+        return render(request, "new_responsible.html", {"form": form_data})
 
 
 @login_required(login_url='/')
 def new_case_view(request, *args, **kwargs):
     if request.method == "GET":
+        project = models.Project.objects.get(id=request.GET.get("project_id"))
         case_form = CaseForm()
-        return render(request, "case.html", {"form": case_form})
+        return render(request, "new_case.html", {"form": case_form, "project": project, "case_id": project.cases.count() + 1})
     if request.method == "POST":
         post_data = request.POST.copy()
+        print(post_data)
         post_data["user"] = request.user.id
         post_data["timestamp"] = str(datetime.datetime.now())
+        post_data["case_id"] = models.Project.objects.get(id=post_data["project"]).cases.count() + 1
         form_data = CaseForm(post_data)
         if form_data.is_valid():
             form_data.save()
             return HttpResponseRedirect("/dashboard/")
-        return render(request, "case.html", {"form": form_data})
+        print(form_data.errors)
+        return render(request, "new_case.html", {"form": form_data})

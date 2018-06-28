@@ -2,25 +2,40 @@
 {% block content %}
 
 <div class="dashboard">
-    <a href="/new-case/">
-        <button type="button" class="btn btn-dark btn-lg">
-        <i class="fa fa-plus"></i> New Case
-    </button>
-    </a>
+    <div class="row">
+        <div class="col col-md-12" align="center">
+            <div class="card" style="width: 80%">
+              <div class="card-body">
+                <h5 class="card-title">Welcome {{request.user.username}} !</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Choose a project to begin work..</h6>
+                  <br><br>
+                  <select class="form-control col-md-8" id="selectedProject">
+                      <option selected disabled value="-1">Select a project</option>
+                      {% for project in projects %}
+                      <option value="{{project.id}}">{{project.name}}</option>
+                      {% endfor %}
+                  </select>
+                  <button id="opener" class="btn btn-success">
+                      <i class="fa fa-file"></i> Open Project</button>
+              </div>
+            </div>
+        </div>
 
-    <br><br><br>
-    <a href="/visualize/">
-        <button type="button" class="btn btn-dark btn-lg">
-            <i class="fa fa-line-chart"></i> Visualize Grievance
-        </button>
-    </a>
+    </div>
 
-    <br><br><br>
-    <a href="/responsible-person/">
-        <button type="button" class="btn btn-dark btn-lg">
-            <i class="fa fa-male"></i> New Responsible Person
-        </button>
-    </a>
 </div>
+
+<script>
+    $("document").ready(function() {
+
+        function openProject() {
+            var val = parseInt($("#selectedProject").val());
+            if (val > 0 ) {
+                location.href = "/project/" + val;
+            }
+        }
+        $("#opener").on("click", openProject);
+    });
+</script>
 
 {% endblock %}

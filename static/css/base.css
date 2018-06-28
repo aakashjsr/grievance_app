@@ -1,49 +1,67 @@
-body {
-    background: #2193b0;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+.container-fluid {
+    padding: 0 !important
 }
 
-
-h1 {
+.navbar-brand {
+ color: white !important;
  font-family: 'Allan', Helvetica, Arial, sans-serif;
- font-size: 70px;
- line-height: 75px;
- color: white;
+ font-size: 50px;
+ line-height: 65px;
+ color: black;
  display: inline-block;
+}
+
+.header {
+    background: #563d7c;
+    color: white;
+}
+.fa-user-circle {
+    color: #563d7c;
+}
+
+.login-icon {
+    margin: 0 auto;
+    font-size: 100px;
+}
+
+.right-menu {
+     font-family: 'Allan', Helvetica, Arial, sans-serif;
+     font-size: 20px;
+     color: white !important;
+     float: right;
+     position: absolute;
+     right: 0;
+     margin-right: 10px;
 }
 
 h2 {
  font-family: 'Allan', Helvetica, Arial, sans-serif;
  font-size: 30px;
  line-height: 75px;
- color: white;
+ color: black;
  display: inline-block;
- float: right
+
 }
 
 h3 {
  font-family: 'Allan', Helvetica, Arial, sans-serif;
  font-size: 30px;
  line-height: 75px;
- color: white;
+ color: black;
 }
 
 p {
  font-family: 'Cardo', Georgia, Times, serif;
  font-size: 18px;
  line-height: 25px;
- color: white
+ color: black
 }
 
 .input-group, button {
     margin-top: 15px;
 }
 
-.login-form {
-    margin-top: 7%;
-}
+
 
 
 a, a:hover {
@@ -51,18 +69,14 @@ a, a:hover {
     color: inherit
 }
 
-.logout {
-     font-family: 'Allan', Helvetica, Arial, sans-serif;
-     font-size: 20px;
-     line-height: 75px;
-     color: white;
-     display: inline-block;
-     float: right;
-     cursor: pointer
+
+
+.nav-item {
+    margin-left: 5px;
 }
 
 .dashboard {
-    margin-top: 10%
+    margin-top: 5%
 }
 
 .btn-warning {
@@ -70,7 +84,7 @@ a, a:hover {
 }
 
 label {
-    color: white;
+    color: black;
     font-family: 'Cardo', Georgia, Times, serif;
     display: block
 }

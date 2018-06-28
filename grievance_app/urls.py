@@ -23,6 +23,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^$', index_view),
     url(r'^login/', login_view),
+    url(r'^project/(?P<project_id>\d+)/$', project_view),
+    url(r'^case/(?P<case_id>\d+)/$', case_view),
     url(r'^logout/', logout_view),
     url(r'^new-case/', new_case_view),
     url(r'^visualize/', visualize_view),

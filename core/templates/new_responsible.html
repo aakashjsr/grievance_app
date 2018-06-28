@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<form action="/responsible-person/" method="POST">
+<div class="dashboard">
+    <div class="row">
+        <div class="col col-md-12" align="center">
+            <div class="card" style="width: 80%">
+              <div class="card-body">
+                <h5 class="card-title"> Add Responsible Person </h5>
+
+                    <form action="/responsible-person/" method="POST">
     {% csrf_token %}
     <div class="row">
         <div class="col col-md-6">
@@ -52,7 +59,12 @@
         </div>
     </div>
 </form>
-<br><br>
+              </div>
+            </div>
+        </div>
 
+    </div>
+
+</div>
 
 {% endblock %}
