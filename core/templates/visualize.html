@@ -6,8 +6,8 @@
 </script>
 <div class="dashboard">
     <div class="row">
-        <div class="col col-md-4" align="center">
-            <div class="card" style="width: 80%">
+        <div class="col col-md-3" align="center">
+            <div class="card" style="width: 100%; margin: 5px">
               <div class="card-body">
                 <h5 class="card-title"> Filters </h5>
                   <div class="row" align="left">
@@ -30,16 +30,17 @@
                     </select>
                   </div>
 
-                  <button id="filter" class="btn btn-primary">Apply Filters</button>
+                  <button id="filter" class="btn btn-success"><i class="fa fa-filter"></i> Apply Filters</button>
 
 
               </div>
             </div>
         </div>
-        <div class="col col-md-8" align="center">
-            <div class="card" style="width: 80%">
+        <div class="col col-md-9" align="center">
+            <div class="card" style="width: 100%; margin: 5px">
               <div class="card-body">
                 <h5 class="card-title"> Grievance Visualization </h5>
+                  <h6 class="card-subtitle mb-2 text-muted">Total Grievance Cases : {{ total_cases }}</h6>
                 <canvas id="myChart"></canvas>
 
               </div>

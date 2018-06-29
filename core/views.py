@@ -61,7 +61,10 @@ def visualize_view(request, *args, **kwargs):
             for cat in categories:
                 stats[cat] = p_cat.get(cat, 0)
             data_set[project.name] = stats
-        return render(request, "visualize.html", {"stats": data_set, "category_list": categories, "project_list": projects.values_list("name", flat=True)})
+        return render(request, "visualize.html", {
+            "stats": data_set, "category_list": categories,
+            "project_list": projects.values_list("name", flat=True), "total_cases": models.Case.objects.count()
+        })
 
 
 @login_required(login_url='/')

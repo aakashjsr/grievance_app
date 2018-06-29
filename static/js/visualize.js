@@ -10,7 +10,7 @@ function computeData() {
     for(index=0; index < selectedProjects.length; index++) {
         var dataPoints = []
         for (sub_index=0; sub_index < selectedCategories.length; sub_index++) {
-            console.log(appData, "\n", selectedProjects[index],"\n", selectedCategories[sub_index])
+          
             dataPoints.push(appData[selectedProjects[index]][selectedCategories[sub_index]])
         }
         item = {label: selectedProjects[index],backgroundColor: randomColor(), data: dataPoints}
