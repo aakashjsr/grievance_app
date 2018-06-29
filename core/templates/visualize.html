@@ -1,6 +1,53 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
+<script>
+    var appData = {{stats | safe }}
+</script>
+<div class="dashboard">
+    <div class="row">
+        <div class="col col-md-4" align="center">
+            <div class="card" style="width: 80%">
+              <div class="card-body">
+                <h5 class="card-title"> Filters </h5>
+                  <div class="row" align="left">
+                    <label><strong>Projects</strong></label>
 
-visualize
+                    <select style="width:100%" multiple="multiple" class="multi-select-1" id="selectedProjects" name="projects">
+                        {% for name in project_list %}
+                        <option value="{{name}}" selected>{{name}}</option>
+                        {% endfor %}
+                    </select>
+
+                  </div>
+                  <br>
+                   <div class="row" align="left">
+                    <label><strong>Grievance Categories</strong></label>
+                    <select style="width:100%" multiple="multiple" class="multi-select-2" id="selectedCategories" name="categories">
+                      {% for name in category_list %}
+                        <option value="{{name}}" selected>{{name}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+
+                  <button id="filter" class="btn btn-primary">Apply Filters</button>
+
+
+              </div>
+            </div>
+        </div>
+        <div class="col col-md-8" align="center">
+            <div class="card" style="width: 80%">
+              <div class="card-body">
+                <h5 class="card-title"> Grievance Visualization </h5>
+                <canvas id="myChart"></canvas>
+
+              </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="{% static 'js/visualize.js' %}"></script>
 
 {% endblock %}

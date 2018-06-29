@@ -1,10 +1,12 @@
 import datetime, json
+import core.models as models
+
+from django.db.models import Count
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from core.forms import CaseForm, ResponsibilityForm
-import core.models as models
 
 
 def index_view(request, *args, **kwargs):
@@ -48,16 +50,26 @@ def case_view(request, case_id, *args, **kwargs):
 @login_required(login_url='/')
 def visualize_view(request, *args, **kwargs):
     if request.method == "GET":
-        return render(request, "visualize.html")
-
-    if request.method == "POST":
-        return render(request, "visualize.html")
+        projects = request.user.projects.all().prefetch_related("cases", "cases__grievance")
+        categories = models.Grievance.objects.order_by("category").values_list("category", flat=True)
+        data_set = {}
+        for project in projects:
+            stats = {}
+            p_cat = {}
+            for item in project.cases.values('grievance__category').annotate(case_count=Count('id')):
+                p_cat[item["grievance__category"]] = item["case_count"]
+            for cat in categories:
+                stats[cat] = p_cat.get(cat, 0)
+            data_set[project.name] = stats
+        return render(request, "visualize.html", {"stats": data_set, "category_list": categories, "project_list": projects.values_list("name", flat=True)})
 
 
 @login_required(login_url='/')
 def responsible_person_view(request, *args, **kwargs):
     if request.method == "POST":
         post_data = request.POST.copy()
+        if not post_data.get("project_id"):
+            return HttpResponseRedirect("/dashboard/")
 
         post_data["added_by"] = request.user.id
         form_data = ResponsibilityForm(post_data)
@@ -90,6 +102,8 @@ def new_case_view(request, *args, **kwargs):
         })
     if request.method == "POST":
         post_data = request.POST.copy()
+        if not post_data.get("project"):
+            return HttpResponseRedirect("/dashboard/")
         post_data["user"] = request.user.id
         post_data["timestamp"] = str(datetime.datetime.now())
         post_data["case_id"] = models.Project.objects.get(id=post_data["project"]).cases.count() + 1

@@ -6,7 +6,7 @@ class Project(models.Model):
     """
     Project relation.
     """
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, unique=True)
 
     def __str__(self):
         return self.name
@@ -72,4 +72,4 @@ class Case(models.Model):
     incident_phase = models.IntegerField(default=1)
 
     def __str__(self):
-        return "{} - {} - {}".format(self.user, self.project, self.complainant_name)
+        return "{} - {} - {}".format(self.user, self.project, self.grievance.category)
