@@ -12,7 +12,7 @@ from core.forms import CaseForm, ResponsibilityForm
 def index_view(request, *args, **kwargs):
     if request.user.is_authenticated():
         return HttpResponseRedirect("/dashboard/")
-    return render(request, "index.html")
+    return render(request, "login.html")
 
 
 def login_view(request, *args, **kwargs):
@@ -22,9 +22,10 @@ def login_view(request, *args, **kwargs):
     if user:
         login(request, user)
         return HttpResponseRedirect("/dashboard/")
-    return render(request, "index.html", {"error": "Invalid username or password"})
+    return render(request, "login.html", {"error": "Invalid username or password"})
 
 
+@login_required(login_url='/')
 def logout_view(request, *args, **kwargs):
     logout(request)
     return HttpResponseRedirect("/")

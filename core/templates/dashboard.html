@@ -31,7 +31,7 @@
         function openProject() {
             var val = parseInt($("#selectedProject").val());
             if (val > 0 ) {
-                location.href = "/project/" + val;
+                location.href = "{% url 'project' 100 %}".replace("100", val);
             }
         }
         $("#opener").on("click", openProject);

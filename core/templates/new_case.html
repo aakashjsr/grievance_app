@@ -8,7 +8,7 @@
                     <h5 class="card-title"> New Case </h5>
 
 
-                    <form action="/new-case/" method="POST" id="caseForm">
+                    <form action="{% url 'new_case' %}" method="POST" id="caseForm">
                         {% csrf_token %}
                         <input type="hidden" name="project" value="{{project.id}}">
                         <div class="row" align="left">
@@ -216,7 +216,7 @@
 
 
             <div class="modal-body">
-                <form action="/responsible-person/" method="POST" id="personForm">
+                <form action="{% url 'responsible' %}" method="POST" id="personForm">
                     {% csrf_token %}
                     <input type="hidden" name="saved" id="saved" value="{}">
                     <input type="hidden" name="project_id" value="{{project.id}}">

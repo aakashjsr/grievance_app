@@ -28,16 +28,16 @@
   <body>
     <div class="container-fluid">
       <nav class="navbar navbar-expand-lg navbar-light header">
-        <a class="navbar-brand" href="/">Grievance App</a>
+        <a class="navbar-brand" href="{% url 'home' %}">Grievance App</a>
 
         {% if request.user.is_authenticated %}
           <div class="right-menu">
-            <a href="/visualize/" class="nav-item">
+            <a href="{% url 'visualize' %}" class="nav-item">
               <i class="fa fa-line-chart"></i>
               Visualize
             </a>
 
-            <a href="/logout/" class="nav-item">
+            <a href="{% url 'logout' %}" class="nav-item">
               <i class="fa fa-power-off"></i>
               Logout
             </a>
